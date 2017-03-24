@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="quicksort.exec"/>
+<fullyQualifiedTypeName name="quicksort.quicksorting"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="BaseUtil.StdRandom"/>
+<fullyQualifiedTypeName name="sort.Selection"/>
+<fullyQualifiedTypeName name="java.util.concurrent.RecursiveAction"/>
+<fullyQualifiedTypeName name="quicksort.MultiQuick"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.concurrent.ForkJoinPool"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+</qualifiedTypeNameHistroy>

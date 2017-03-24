@@ -1,0 +1,221 @@
+package doghouse;
+
+import java.util.Random;
+
+public class StdRandom {
+
+	private static Random random;
+	private static long seed;
+	
+	static {
+		seed = System.currentTimeMillis();
+		random = new Random(seed);
+	}
+	public static void setSeed(long s) {
+		seed   = s;
+		random = new Random(seed);
+	}
+	public static long getSeed() {
+		return seed;
+	}
+	/**
+	 * 获得 [0, 1) 区间内的随机实数
+	 * @return [0, 1) 区间内的随机实数
+	 */
+	public static double getDouble() {
+		return random.nextDouble();
+	}
+	/**
+	 * 获得 [0, 1) 区间内的随机实数
+	 * @return [0, 1) 区间内的随机实数
+	 */
+	public static double random() {
+		return getDouble();
+	}
+	/**
+	 * 获得 [0, n) 区间内的随机整数
+	 * @param n 可能的整数个数
+	 * @return [0, n) 区间内的随机整数
+	 */
+	public static int getInteger(int n) {
+		if (n <= 0) throw new IllegalArgumentException("argument must be positive");
+		return random.nextInt(n);
+	}
+	/**
+	 * 获得指定区间内的随机整数
+	 * @param a 区间左端
+	 * @param b 区间右端
+	 * @return [a, b) 区间内的随机整数
+	 */
+	public static int getInteger(int a, int b) {
+		if ((b <= a) || ((long) (b-a) >= Integer.MAX_VALUE)) {
+			throw new IllegalArgumentException("invalid range: [" + a + ", " + b + "]");
+		}
+		return a + getInteger(b-a);
+	}
+	/**
+	 * 获得 [a, b) 区间内的随机实数
+	 * @param a 区间左端
+	 * @param b 区间右端
+	 * @return [a, b) 区间内的随机实数
+	 */
+	public static double getDouble(double a, double b) {
+		if (!(a < b)) {
+			throw new IllegalArgumentException("invalid range: [" + a + ", " + b + "]");
+		}
+		return a + random() * (b-a);
+	}
+	/**
+	 * 打乱数组元素
+	 * @param a 待打乱的数组
+	 */
+	public static void shuffle(Object[] a) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		int n = a.length;
+		for (int i = 0; i < n; i++) {
+			int r = i + getInteger(n-i); //between i and n-1
+			Object temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 打乱数组元素
+	 * @param a 待打乱的数组
+	 */
+	public static void shuffle(double[] a) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		int n = a.length;
+		for (int i = 0; i < n; i++) {
+			int r = i + getInteger(n-i); //between i and n-1
+			double temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 打乱数组元素
+	 * @param a 待打乱的数组
+	 */
+	public static void shuffle(int[] a) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		int n = a.length;
+		for (int i = 0; i < n; i++) {
+			int r = i + getInteger(n-i); //between i and n-1
+			int temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 打乱数组元素
+	 * @param a 待打乱的数组
+	 */
+	public static void shuffle(char[] a) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		int n = a.length;
+		for (int i = 0; i < n; i++) {
+			int r = i + getInteger(n-i); //between i and n-1
+			char temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 打乱数组指定区间的元素
+	 * @param a 待打乱的数组
+	 * @param low 数组区间左端（包含）
+	 * @param high 数组区间右端（不包含）
+	 */
+	public static void shuffle(Object[] a, int low, int high) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		if (low < 0 || low >= high || high > a.length) {
+			throw new IndexOutOfBoundsException("invalid subarray range: [" + low + ", " + high + ")");
+		}
+		for (int i = low; i < high; i++) {
+			int r = i + getInteger(high - i); //between i and high - 1
+			Object temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 打乱数组指定区间的元素
+	 * @param a 待打乱的数组
+	 * @param low 数组区间左端（包含）
+	 * @param high 数组区间右端（不包含）
+	 */
+	public static void shuffle(double[] a, int low, int high) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		if (low < 0 || low >= high || high > a.length) {
+			throw new IndexOutOfBoundsException("invalid subarray range: [" + low + ", " + high + ")");
+		}
+		for (int i = low; i < high; i++) {
+			int r = i + getInteger(high-i); //between i and high-1
+			double temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 打乱数组指定区间的元素
+	 * @param a 待打乱的数组
+	 * @param low 数组区间左端（包含）
+	 * @param high 数组区间右端（不包含）
+	 */
+	public static void shuffle(int[] a, int low, int high) {
+		if (a == null) throw new IllegalArgumentException("argument array is null");
+		if (low < 0 || low >= high || high > a.length) {
+			throw new IndexOutOfBoundsException("invalid subarray range: [" + low + ", " + high + ")");
+		}
+		for (int i = low; i < high; i++) {
+			int r = i + getInteger(high-i); //between i and high-1
+			int temp = a[i];
+			a[i] = a[r];
+			a[r] = temp;
+		}
+	}
+	/**
+	 * 获得随机排序的整数数组(长度为n)
+	 * @param n 元素个数
+	 * @return 一个元素为 0 至 n-1 的随机排序的整数数组
+	 */
+	public static int[] getIntegerArray(int n) {
+		if (n < 0) throw new IllegalArgumentException("argument is negative");
+		int[] perm = new int[n];
+		for (int i = 0; i < n; i++)
+			perm[i] = i;
+		shuffle(perm);
+		return perm;
+	}
+	/**
+	 * 获得随机排序的整数数组(长度为k)
+	 * @param n 可选的元素个数
+	 * @param k 选择的元素个数
+	 * @return 包含 [0,n) 中 k 个元素的打乱的数组
+	 */
+	public static int[] permutation(int n, int k) {
+		if (n < 0) throw new IllegalArgumentException("argument is negative");
+		if (k < 0 || k > n) throw new IllegalArgumentException("k must be between 0 and n");
+		int[] perm = new int[k];
+		//获得包含打乱的0至k的数组
+		for (int i = 0; i < k; i++) {
+			int r = getInteger(i+1); //between 0 and i
+			perm[i] = perm[r];
+			perm[r] = i;
+		}
+		//随机将一些元素换成[k,n-1)中元素
+		for (int i = k; i < n; i++) {
+			int r = getInteger(i+1); //between 0 and i
+			if (r < k) perm[r] = i;
+		}
+		return perm;
+	}
+	public static void main(String[] args) {
+		int[] testArray = StdRandom.getIntegerArray(100);
+		for (int i = 0; i < testArray.length; i++) {
+			System.out.print(testArray[i] + "\t");
+			if ((i+1) % 10 == 0) System.out.println();
+		}
+	}
+}

@@ -1,0 +1,84 @@
+package quicksort;
+
+public class quicksorting {
+	public static void quicksort(int a[],int left,int right) {
+		if(left>right)
+			return ;
+		int temp=a[left];
+		int  i=left;
+		int j=right;
+		while(i!=j)
+		{
+			while(a[j]>=temp&&i<j)
+				j--;
+			while(a[j]<=temp&&i<j)
+				i++;
+			if(i<j)
+			{
+				int t=a[i];
+				a[i]=a[j];
+				a[j]=t;
+			}
+		}
+		a[left]=a[i];
+		a[i]=temp;
+		final int  h=i;
+		quicksort(a,left,i-1);
+		quicksort(a,i+1,right);
+		
+	}
+	
+	public static void quicksort_multi_Thread(int a[],int left,int right) {
+		if(left>right)
+			return ;
+		int temp=a[left];
+		int  i=left;
+		int j=right;
+		while(i!=j)
+		{
+			while(a[j]>=temp&&i<j)
+				j--;
+			while(a[j]<=temp&&i<j)
+				i++;
+			if(i<j)
+			{
+				int t=a[i];
+				a[i]=a[j];
+				a[j]=t;
+			}
+		}
+		a[left]=a[i];
+		a[i]=temp;
+		final int  h=i;
+		//quicksort(a,left,i-1);
+		//quicksort(a,i+1,right);
+		Thread t1=new Thread(new Runnable() {  
+            @Override  
+            public void run() {  
+            	quicksort(a,left,h-1);
+            	
+            }  
+        });
+		t1.start(); 
+		Thread t2=new Thread(new Runnable() {  
+            @Override  
+            public void run() {  
+            	
+            	quicksort(a,h+1,right);
+            }  
+        });
+		t2.start();
+		try {
+			t1.join();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			t2.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

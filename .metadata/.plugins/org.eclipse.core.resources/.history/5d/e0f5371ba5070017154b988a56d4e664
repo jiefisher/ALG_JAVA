@@ -1,0 +1,24 @@
+package exec;
+import quicksort.quicksorting;
+import sort.Selection;
+import BaseUtil.StdRandom;
+public class exec {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] a=StdRandom.getIntegerArray(10000000);
+		long begintime = System.currentTimeMillis();
+		quicksorting.quicksort_multi_Thread(a,0,a.length-1);
+		//Selection.sort(a);
+		long endtime=System.currentTimeMillis();
+		long costTime = endtime - begintime;
+		System.out.println("test"  + ":" + costTime + "ms");
+//		for(int i=0;i<a.length;i++)
+//		{
+//			System.out.print(a[i]);
+//			System.out.print(" ");
+//		}
+		
+	}
+
+}
